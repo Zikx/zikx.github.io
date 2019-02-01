@@ -18,7 +18,9 @@ from django.urls import path
 import blog.views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', blog.views.home, name='home'),
-    path('blog/<int:blog_id>', blog.views.detail, name="detail"),
+    path('blog/<int:blog_id>', blog.views.detail, name="detail"), #blog.id를 int형으로 선언했음
+    path('blog/new/', blog.views.new, name='new'),
+    path('blog/create', blog.views.create, name='create'),
 ]
