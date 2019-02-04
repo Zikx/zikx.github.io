@@ -4,9 +4,9 @@ from .models import Blog
 
 # Create your views here.
 
-def home(request):
+def blog(request):
     blogs = Blog.objects
-    return render(request,'home.html', {'blogs' : blogs})
+    return render(request,'blog.html', {'blogs' : blogs})
 
 
 def detail(request, blog_id): # 요청과 객체의 번호를 받는다.

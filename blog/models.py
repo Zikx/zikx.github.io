@@ -6,7 +6,7 @@ class Blog(models.Model):
         pub_date = models.DateTimeField('date published')
         body = models.TextField()
 
-        def __str__(self):
+        def __str__(self): 
             return self.title # 제목을 리턴한다.
         
         def summary(self): # self : 자기 자신을 받음

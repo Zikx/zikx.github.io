@@ -1,26 +1,19 @@
-"""secondproject URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
+
+from django.conf import settings # settings에 있는 url을 가져올것이기때문
+from django.conf.urls.static import static # 걍외워라~
 import blog.views
+import portfolio.views
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('', blog.views.home, name='home'),
-    path('blog/<int:blog_id>', blog.views.detail, name="detail"), #blog.id를 int형으로 선언했음
-    path('blog/new/', blog.views.new, name='new'),
-    path('blog/create', blog.views.create, name='create'),
-]
+    path('blog/', include('blog.urls')),
+    path('portfolio/', include('portfolio.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# static 부분은 병렬적으로 추가한것인데 
+# urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT) 와 같은 의미임.
