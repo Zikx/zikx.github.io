@@ -1,7 +1,8 @@
 
 {% extends 'base.html' %}
 {% block content %}
-{% load staticfiles %}
+{% load staticfiles %} 
+<!-- staticfile을 사용할것 -->
 <h1>Portfolio</h1>
 
 <main role="main">
@@ -21,7 +22,7 @@
                 {% for portfolio in portfolios.all %}
               <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                  <img class="card-img-top" src="{{ portfolio.image.url }}" alt=" Card image cap">
+                  <img class="card-img-top" height="200" src="{{ portfolio.image.url }}" alt="Card image cap">
                   <div class="card-body">
                     <h4>{{ portfolio.title }}</h4>
                     <p class="card-text">{{ portfolio.description }}</p>

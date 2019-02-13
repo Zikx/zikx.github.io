@@ -10,9 +10,10 @@ import portfolio.views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('portfolio/', include('portfolio.urls')),
+    path('accounts/', include('accounts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # static 부분은 병렬적으로 추가한것인데 
