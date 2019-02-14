@@ -2,12 +2,13 @@ from django.shortcuts import render , get_object_or_404, redirect
 from django.utils import timezone #timezone import 
 from django.core.paginator import Paginator #pagination을 위함
 from .models import Blog
+from .form import BlogPost
 
 # Create your views here.
 
 def blog(request):
     blogs = Blog.objects
-    blog_list = Blog.objects.all()#블로그 모든 글들을 대상으로 
+    blog_list = Blog.objects.all().order_by('-id')#블로그 모든 글들을 대상으로 
 
     # 블로그 객체 3개를 한 페이지로 자른다
     paginator = Paginator(blog_list, 3) # blog_list객체를 대상으로 3개의 객체를 하나의 페이지로 삼겠다.
@@ -45,3 +46,17 @@ def create(request): #입력받은 내용을 db에 넣는 함수
     # redirect(url)
     # redirect 함수는 url을 받고, 다른 url(구글이라던지 네이버라던지) 을 받고, 함수를 수행하고 다른 url로 이동할수있음
     # render 함수는 세번째 함수로 키값을 받기에 파이썬 안에서 함수를 지지고 볶고서 이 프로젝트 내에서 활용하려고 할때 사용
+
+def blogpost(request):
+    # 1. 입력된 내용을 처리하는 기능 -> POST
+    if request.method == "POST":
+        form = BlogPost(request.POST)
+        if form.is_valid(): # form에 입력이 되었는지를 확인하는 함수 맞으면 1리턴 
+            post = form.save(commit=False) # 객체를 가져오되, 저장하지않고 가져온다!
+            post.pub_date = timezone.now() 
+            post.save()
+            return redirect('blog')
+    # 2. 빈 페이지를 띄워주는 기능 -> GET
+    else:
+        form = BlogPost()
+        return render(request,'new.html',{'form':form})
