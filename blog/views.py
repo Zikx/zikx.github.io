@@ -15,7 +15,7 @@ def blog(request):
                                         # 페이지 3개씩 자름
     #request된 페이지가 뭔지를 알아내고 (request 페이지를 변수에 담아내고)
     page = request.GET.get('page') # key값이 page인 dict형 value 값을 page변수에 담아줌
-    #request된 펭지ㅣ를 얻어온 뒤 return 함
+    #request된 페이지를 얻어온 뒤 return 함
     posts = paginator.get_page(page) #get_page(page) page번호의 페이지를 가져오는함수
     #결과적으로 request에 해당하는 페이지의 번호가 posts에 담기게됨
     return render(request,'blog.html', {'blogs' : blogs, 'posts':posts })
