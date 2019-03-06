@@ -12,3 +12,4 @@ pytz==2018.9
 requests==2.21.0
 urllib3==1.24.1
 whitenoise==4.1.2
+web: python manage.py runserver 0.0.0.0:$PORT --noreload
