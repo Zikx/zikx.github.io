@@ -1,23 +1,17 @@
 
 {% extends 'base.html' %}
 {% block content %}
-{% load staticfiles %}
+
 <br>
-<div class="container">
-      <form action="{% url 'portcreate' %}">
-        <h4>제목: </h4>
-        <input type="text" name="title">
-        <br>
-        <br>
-        <h4>본문: </h4>
-        <textarea cols=40 rows=10 name="body"></textarea>
-        <br>
-        <br>
-        <p>
-          <input id = "pic_id" type = "file" class = "" name = "image">
-       </p>     
-        <input class="btn btn-dark" type="submit" value="제출하기">
-    </form>
-  </div>
+  <h1>글 작성 페이지입니다.</h1>
+  <form method = "POST" action="{% url 'portcreate' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+      {{form.as_table}}
+    </table>
+    <br>
+    <input type="submit" class = "btn btn-dark" value = "제출하기">
+  </form>
+
 <br>
-    {% endblock %}
+{% endblock %}

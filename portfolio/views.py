@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Portfolio
+from .form import PortfolioPost
 # Create your views here.
 
 def portfolio(request):
@@ -10,10 +11,10 @@ def newport(request): #new.html 을 띄워주는 역할
     return render(request, 'newport.html')
 
 def portcreate(request): #입력받은 내용을 db에 넣는 함수 
-    portfolio = Portfolio() #blog라는 객체를 생성한다.
+    portfolio = Portfolio(image = request.FILES['image']) #blog라는 객체를 생성한다.
     portfolio.title = request.GET['title'] #blog 라는 객체안에 title을 받고 blog 객체에 추가한다.
-    portfolio.image = request.GET['image']
-    portfolio.description = request.GET['body'] # 마찬가지로 body를 blog 객체에 추가
+    # portfolio.image = request.GET['image']
+    portfolio.description = request.GET['description'] # 마찬가지로 body를 blog 객체에 추가
     portfolio.save() # 쿼리셋 메소드중 하나인데, blog 라는 객체를 db에 저장해라. 
     #blog.delete() : db에 지워라
     return render(request, 'portfolio/portfolio.html')

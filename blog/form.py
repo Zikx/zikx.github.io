@@ -3,8 +3,8 @@ from .models import Blog
 
 class BlogPost(forms.ModelForm):
     class Meta:
-        model = Blog
-        fields = ['title', 'body']
+        model = Blog #어떤 모델을 기반으로 할지
+        fields = ['title', 'body'] # 모델의 타이틀, 바디, 이미지필드를 이용함
         
 
     # email = forms.EmailField()
